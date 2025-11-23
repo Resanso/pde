@@ -1,7 +1,7 @@
-import type { Context } from '@/lib/trpc/context';
-import { TRPCError, initTRPC } from '@trpc/server';
-import superjson from 'superjson';
-import { ZodError } from 'zod';
+import { initTRPC, TRPCError } from "@trpc/server";
+import superjson from "superjson";
+import { ZodError } from "zod";
+import type { Context } from "@/lib/trpc/context";
 
 /**
  * Initialization of tRPC backend
@@ -31,7 +31,7 @@ export const createCallerFactory = t.createCallerFactory;
 /** Reusable middleware that enforces users are logged in before running the procedure. */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   if (!ctx.session) {
-    throw new TRPCError({ code: 'UNAUTHORIZED' });
+    throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
   return next({

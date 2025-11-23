@@ -1,10 +1,10 @@
-import 'server-only'; // <-- ensure this file cannot be imported from the client
-import { createHydrationHelpers } from '@trpc/react-query/rsc';
-import { cache } from 'react';
-import { makeQueryClient } from './query-client';
-import { createCallerFactory } from '../server/trpc';
-import { createTRPCContext } from './context';
-import { appRouter } from '../server/routers/_app';
+import "server-only"; // <-- ensure this file cannot be imported from the client
+import { createHydrationHelpers } from "@trpc/react-query/rsc";
+import { cache } from "react";
+import { appRouter } from "../server/routers/_app";
+import { createCallerFactory } from "../server/trpc";
+import { createTRPCContext } from "./context";
+import { makeQueryClient } from "./query-client";
 // IMPORTANT: Create a stable getter for the query client that
 //            will return the same client during the same request.
 export const getQueryClient = cache(makeQueryClient);

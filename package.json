@@ -17,7 +17,8 @@
     "db:studio": "drizzle-kit studio",
     "db:check": "drizzle-kit check",
     "auth:generate": "npx @better-auth/cli generate --output ./src/lib/auth/schema.ts --config ./src/lib/auth/index.ts",
-    "auth:migrate": "pnpm db:push"
+    "auth:migrate": "pnpm db:push",
+    "prepare": "husky"
   },
   "dependencies": {
     "@better-auth/cli": "^1.4.1",
@@ -40,11 +41,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.7",
+    "husky": "^9.1.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -1,9 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { AuthForm } from "@/components/auth/auth-form";
 import { UserProfile } from "@/components/auth/user-profile";
 import { authClient } from "@/lib/auth/client";
-import Link from "next/link";
 
 export default function Home() {
   const { data: session, isPending } = authClient.useSession();
@@ -24,8 +24,8 @@ export default function Home() {
             Better Auth Testing
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Test your Better Auth setup with email/password authentication and Google OAuth.
-            Sign up, sign in, and manage your session.
+            Test your Better Auth setup with email/password authentication and
+            Google OAuth. Sign up, sign in, and manage your session.
           </p>
         </div>
 
@@ -45,7 +45,8 @@ export default function Home() {
                   🎉 Authentication Successful!
                 </h3>
                 <p className="text-blue-700 text-sm mb-4">
-                  You're now signed in. Visit your dashboard to see more details.
+                  You're now signed in. Visit your dashboard to see more
+                  details.
                 </p>
                 <Link
                   href="/dashboard"
@@ -71,6 +72,7 @@ export default function Home() {
               Dashboard
             </Link>
             <button
+              type="button"
               onClick={() => window.location.reload()}
               className="px-4 py-2 bg-green-200 text-green-800 rounded-md hover:bg-green-300 transition-colors"
             >
@@ -88,7 +90,12 @@ export default function Home() {
             <div>✓ Better Auth Client: Configured</div>
             <div>✓ Email/Password Auth: Enabled</div>
             <div>✓ Google OAuth: Configured (check env vars)</div>
-            <div>✓ Database: {process.env.NODE_ENV === 'development' ? 'Dev Mode' : 'Production'}</div>
+            <div>
+              ✓ Database:{" "}
+              {process.env.NODE_ENV === "development"
+                ? "Dev Mode"
+                : "Production"}
+            </div>
           </div>
         </div>
       </div>

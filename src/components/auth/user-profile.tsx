@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { authClient } from "@/lib/auth/client";
 
 export function UserProfile() {
@@ -34,6 +35,7 @@ export function UserProfile() {
         <h3 className="text-red-800 font-medium">Error loading session</h3>
         <p className="text-red-600 text-sm mt-1">{error.message}</p>
         <button
+          type="button"
           onClick={() => refetch()}
           className="mt-3 px-4 py-2 bg-red-600 text-white text-sm rounded-md hover:bg-red-700"
         >
@@ -59,6 +61,7 @@ export function UserProfile() {
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-gray-900">User Profile</h3>
         <button
+          type="button"
           onClick={handleSignOut}
           className="px-4 py-2 bg-red-600 text-white text-sm rounded-md hover:bg-red-700 transition-colors"
         >
@@ -68,22 +71,22 @@ export function UserProfile() {
 
       <div className="space-y-3">
         <div>
-          <label className="text-sm font-medium text-gray-500">Name</label>
+          <span className="text-sm font-medium text-gray-500">Name</span>
           <p className="text-gray-900">{session.user.name || "Not provided"}</p>
         </div>
 
         <div>
-          <label className="text-sm font-medium text-gray-500">Email</label>
+          <span className="text-sm font-medium text-gray-500">Email</span>
           <p className="text-gray-900">{session.user.email}</p>
         </div>
 
         <div>
-          <label className="text-sm font-medium text-gray-500">User ID</label>
+          <span className="text-sm font-medium text-gray-500">User ID</span>
           <p className="text-gray-900 text-sm font-mono">{session.user.id}</p>
         </div>
 
         <div>
-          <label className="text-sm font-medium text-gray-500">Created At</label>
+          <span className="text-sm font-medium text-gray-500">Created At</span>
           <p className="text-gray-900">
             {session.user.createdAt
               ? new Date(session.user.createdAt).toLocaleString()
@@ -92,7 +95,9 @@ export function UserProfile() {
         </div>
 
         <div>
-          <label className="text-sm font-medium text-gray-500">Session Expires</label>
+          <span className="text-sm font-medium text-gray-500">
+            Session Expires
+          </span>
           <p className="text-gray-900">
             {new Date(session.session.expiresAt).toLocaleString()}
           </p>
@@ -100,11 +105,15 @@ export function UserProfile() {
 
         {session.user.image && (
           <div>
-            <label className="text-sm font-medium text-gray-500">Profile Image</label>
+            <span className="text-sm font-medium text-gray-500">
+              Profile Image
+            </span>
             <div className="mt-2">
-              <img
+              <Image
                 src={session.user.image}
                 alt="Profile"
+                width={64}
+                height={64}
                 className="w-16 h-16 rounded-full object-cover"
               />
             </div>
@@ -113,7 +122,9 @@ export function UserProfile() {
       </div>
 
       <div className="mt-6 p-4 bg-gray-50 rounded-md">
-        <h4 className="text-sm font-medium text-gray-700 mb-2">Raw Session Data</h4>
+        <h4 className="text-sm font-medium text-gray-700 mb-2">
+          Raw Session Data
+        </h4>
         <pre className="text-xs text-gray-600 bg-white p-3 rounded border overflow-x-auto">
           {JSON.stringify(session, null, 2)}
         </pre>

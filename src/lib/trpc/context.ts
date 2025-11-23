@@ -1,16 +1,18 @@
-import { db } from '@/lib/db/index';
-import { cache } from 'react';
+import { cache } from "react";
+import { db } from "@/lib/db/index";
 
 export const createTRPCContext = cache(async () => {
   /**
    * @see: https://trpc.io/docs/server/context
    */
 
-  const session = {user: {
-    id: 'user_123',
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-  }};
+  const session = {
+    user: {
+      id: "user_123",
+      name: "John Doe",
+      email: "john.doe@example.com",
+    },
+  };
   return { db, session };
 });
 
