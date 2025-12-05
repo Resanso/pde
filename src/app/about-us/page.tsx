@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function AboutUsPage() {
     return (
         <main className="min-h-screen bg-gray-50 pt-24 pb-16">
@@ -10,8 +12,8 @@ export default function AboutUsPage() {
                     </h1>
 
                     {/* Logo Placeholder */}
-                    <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 font-semibold shadow-sm">
-                        LOGO
+                    <div className="relative w-48 h-48 mb-4">
+                        <img src="/logo.png" alt="PDE Logo" className="w-full h-full object-contain" />
                     </div>
 
                     {/* Description Container */}

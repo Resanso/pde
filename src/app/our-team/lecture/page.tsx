@@ -16,8 +16,19 @@ export default function OurTeamPage() {
         >
             <div className="bg-white border border-gray-200 rounded-xl p-6 flex flex-col items-center h-full shadow-sm hover:shadow-md transition-shadow">
                 {/* Profile Image Placeholder */}
-                <div className="w-24 h-24 bg-gray-300 rounded-full mb-4 flex items-center justify-center text-gray-500 font-medium">
-                    Photo
+                {/* Profile Image */}
+                <div className="w-24 h-24 mb-4 relative rounded-full overflow-hidden bg-gray-100">
+                    {lecturer.image ? (
+                        <img
+                            src={lecturer.image}
+                            alt={lecturer.name}
+                            className="w-full h-full object-cover"
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-400">
+                            Photo
+                        </div>
+                    )}
                 </div>
 
                 <h3 className="text-lg font-bold text-gray-900 text-center group-hover:text-blue-600 transition-colors">
@@ -41,7 +52,7 @@ export default function OurTeamPage() {
 
                 {/* Head of Laboratory */}
                 {headOfLab && (
-                    <div className="flex justify-center">
+                    <div className="flex justify-center mb-16">
                         <div className="w-full max-w-sm">
                             <h2 className="text-xl font-bold text-center mb-6 uppercase tracking-wider text-gray-800">
                                 Head of Laboratory

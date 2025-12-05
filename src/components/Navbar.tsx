@@ -30,19 +30,19 @@ export function Navbar() {
 
     return (
         <div className="fixed top-0 left-0 right-0 z-50 flex justify-center mt-6">
-            <nav className="bg-[#2E5843] rounded-full px-8 py-4 flex items-center justify-center gap-12 w-[80vw] shadow-lg relative">
+            <nav className="bg-[#2E5843] rounded-full px-8 py-4 flex items-center justify-center gap-24 w-[65vw] shadow-lg relative">
                 {/* Placeholder for Logo */}
-                <div className="flex-shrink-0 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                    LOGO
+                <div className="flex-shrink-0 relative w-32 h-16 bg-white rounded-full overflow-hidden p-1">
+                    <img src="/logo.png" alt="PDE Logo" className="w-full h-full object-contain" />
                 </div>
 
                 {/* Navigation Links */}
-                <ul className="flex items-center gap-8">
+                <ul className="flex items-center gap-18">
                     {navItems.map((item) => (
                         <li key={item.label} className="relative group">
                             <Link
                                 href={item.href}
-                                className="text-white hover:text-white/80 transition-colors font-medium text-sm flex items-center gap-1"
+                                className="text-white hover:text-white/80 transition-colors font-extrabold text-md flex items-center gap-1"
                             >
                                 {item.label}
                                 {item.children && (

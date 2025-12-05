@@ -29,9 +29,16 @@ export default async function LecturerDetailPage({ params }: { params: Promise<{
                     {/* Left Column: Sidebar (1 col) */}
                     <div className="md:w-1/3 p-8 flex flex-col items-center text-center">
                         {/* Photo */}
-                        <div className="w-56 h-56 bg-gray-200 rounded-full mb-8 flex items-center justify-center text-gray-400 overflow-hidden">
-                            {/* In real app use Image component */}
-                            <span className="text-4xl">📷</span>
+                        <div className="w-56 h-56 bg-white rounded-full mb-8 flex items-center justify-center overflow-hidden border-4 border-gray-100 shadow-sm">
+                            {lecturer.image ? (
+                                <img
+                                    src={lecturer.image}
+                                    alt={lecturer.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <span className="text-4xl text-gray-300">📷</span>
+                            )}
                         </div>
 
                         <h1 className="text-xl font-bold text-gray-900 mb-8">
