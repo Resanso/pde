@@ -6,14 +6,7 @@ export const createTRPCContext = cache(async () => {
    * @see: https://trpc.io/docs/server/context
    */
 
-  const session = {
-    user: {
-      id: "user_123",
-      name: "John Doe",
-      email: "john.doe@example.com",
-    },
-  };
-  return { db, session };
+  return { db };
 });
 
 // export async function createTRPCContext(opts: {

@@ -1,7 +1,7 @@
-import { router } from "@/lib/server/trpc";
-import { usersRouter } from "./users";
+import { publicProcedure, router } from "@/lib/server/trpc";
+
 export const appRouter = router({
-  users: usersRouter,
+  health: publicProcedure.query(() => "ok"),
 });
 // export type definition of API
 export type AppRouter = typeof appRouter;
