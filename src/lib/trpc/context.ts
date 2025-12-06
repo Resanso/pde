@@ -1,12 +1,18 @@
 import { cache } from "react";
 import { db } from "@/lib/db/index";
 
+import { createClient } from "@/lib/supabase/server";
+
 export const createTRPCContext = cache(async () => {
   /**
    * @see: https://trpc.io/docs/server/context
    */
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  return { db };
+  return { db, supabase, user };
 });
 
 // export async function createTRPCContext(opts: {

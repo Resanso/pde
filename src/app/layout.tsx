@@ -4,6 +4,7 @@ import "./globals.css";
 import { TRPCProvider } from "@/lib/trpc/client";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { PageWrapper } from "@/components/PageWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,12 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <TRPCProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning={true}>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          suppressHydrationWarning={true}
         >
           <Navbar />
-          <div className="bg-gray-50 pt-24">{children}</div>
+          <PageWrapper>{children}</PageWrapper>
           <Footer />
         </body>
       </html>

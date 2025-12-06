@@ -3,8 +3,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
+    const pathname = usePathname();
+    const hiddenPaths = ["/login", "/dashboard"];
+    const shouldHide = hiddenPaths.some((path) => pathname.startsWith(path));
+
+    if (shouldHide) return null;
+
     const navItems = [
         { label: "Home", href: "/" },
         { label: "About Us", href: "/about-us" },
