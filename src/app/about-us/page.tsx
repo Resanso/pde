@@ -17,19 +17,10 @@ export default function AboutUsPage() {
                     </div>
 
                     {/* Description Container */}
-                    <div className="w-full bg-[#9caea4] rounded-xl p-8 md:p-12 text-white shadow-md">
+                    <div className="w-full bg-emerald-800 rounded-xl p-8 md:p-12 text-white shadow-md">
                         <div className="max-w-3xl mx-auto space-y-4 text-justify md:text-center leading-relaxed">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <p>
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                            <p>
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                            </p>
-                            <p>
-                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
+                                Product Design & Ergonomics adalah keprofesian di bawah Kelompok Keahlian 1 (KK1) Fakultas Rekayasa Industri - Universitas Telkom yang bergerak dalam bidang pengembangan produk, ergonomi, desain dan testing produk, proses manufaktur, perlindungan produk, dan desain multimedia.
                             </p>
                         </div>
                     </div>
@@ -40,14 +31,11 @@ export default function AboutUsPage() {
                     {/* Vision Card */}
                     <div className="border-4 border-blue-400 rounded-2xl p-8 md:p-10 flex flex-col items-center text-center space-y-6 bg-white shadow-sm hover:shadow-md transition-shadow">
                         <h2 className="text-3xl font-bold text-gray-900 uppercase">
-                            Vision
+                            Visi Laboratorium Riset PDE
                         </h2>
                         <div className="text-gray-700 leading-relaxed space-y-4">
                             <p>
-                                To become a leading research laboratory in product development and ergonomics, fostering innovation that improves human well-being and productivity.
-                            </p>
-                            <p>
-                                We aim to bridge the gap between theoretical knowledge and practical application through cutting-edge research and industry collaboration.
+                                Menjadi laboratorium riset unggulan di bidang Pengembangan Produk (Product Development) dan Ergonomi (Human Factors) yang berperan aktif dalam pengembangan ilmu pengetahuan dan teknologi berbasis inovasi dan keberlanjutan, serta berkontribusi pada peningkatan kualitas hidup dan daya saing industri nasional.
                             </p>
                         </div>
                     </div>
@@ -55,13 +43,12 @@ export default function AboutUsPage() {
                     {/* Mission Card */}
                     <div className="bg-gray-200 rounded-2xl p-8 md:p-10 flex flex-col items-center text-center space-y-6 shadow-sm hover:shadow-md transition-shadow">
                         <h2 className="text-3xl font-bold text-gray-900 uppercase">
-                            Mission
+                            Misi Laboratorium Riset PDE
                         </h2>
-                        <ul className="text-gray-700 leading-relaxed space-y-3 list-disc list-inside text-left w-full max-w-sm mx-auto">
-                            <li>Conduct high-quality research in ergonomics and design.</li>
-                            <li>Develop sustainable product solutions for local industries.</li>
-                            <li>Educate the next generation of industrial engineers and designers.</li>
-                            <li>Collaborate with global partners to share knowledge and resources.</li>
+                        <ul className="text-gray-700 leading-relaxed space-y-3 list-disc list-inside text-left w-full mx-auto">
+                            <li>Menyelenggarakan kegiatan penelitian yang berfokus pada metodologi perancangan dan pengembangan produk baru (NPD) serta evaluasi dan optimasi sistem kerja berbasis prinsip ergonomi (human factors).</li>
+                            <li>Mengembangkan dan menyebarluaskan sains dan teknologi di bidang pemodelan digital, simulasi kinerja produk (CAE), dan analisis interaksi manusia-sistem yang diakui secara nasional dan internasional.</li>
+                            <li>Memanfaatkan ilmu pengetahuan, teknologi, dan keahlian di bidang PDE melalui kerja sama dan pengabdian kepada pemerintah, masyarakat, dan industri untuk meningkatkan efektivitas, keamanan, dan kenyamanan produk dan sistem.</li>
                         </ul>
                     </div>
                 </section>
