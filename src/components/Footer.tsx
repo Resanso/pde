@@ -11,8 +11,7 @@ export function Footer() {
                         <p className="text-white text-xl leading-relaxed max-w-4xl font-extrabold">
                             Product Development and Ergonomics Research Laboratory
                             <br className="hidden md:block" />
-                            Department of Industrial Engineering, Universitas Andalas
-                        </p>
+Faculty of Industrial Engineering, Telkom University                        </p>
                     </div>
 
                     {/* Logo Placeholder */}
