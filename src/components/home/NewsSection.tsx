@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type Article = {
     id: string
     title: string
@@ -45,9 +47,12 @@ export function NewsSection({ articles }: { articles: Article[] }) {
                                     </h3>
 
                                     <div className="mt-auto">
-                                        <button className="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full text-sm font-medium transition-colors">
+                                        <Link 
+                                            href={`/news/${item.id}`}
+                                            className="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full text-sm font-medium transition-colors inline-block"
+                                        >
                                             Read More
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -58,3 +63,4 @@ export function NewsSection({ articles }: { articles: Article[] }) {
         </section>
     );
 }
+

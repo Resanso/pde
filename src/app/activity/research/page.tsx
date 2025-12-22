@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function ResearchPage() {
     return (
         <main className="min-h-screen bg-gray-50 pt-24 pb-16 px-4">
@@ -41,11 +43,21 @@ export default function ResearchPage() {
 
                     {/* Right Column: Images */}
                     <div className="flex flex-col gap-6">
-                        <div className="w-full aspect-[4/3] bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 shadow-sm">
-                            Image Placeholder 1
+                        <div className="w-full aspect-[4/3] relative rounded-lg overflow-hidden shadow-sm">
+                            <Image
+                                src="/research1.jpeg"
+                                alt="Research Image 1"
+                                fill
+                                className="object-cover"
+                            />
                         </div>
-                        <div className="w-full aspect-[4/3] bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 shadow-sm">
-                            Image Placeholder 2
+                        <div className="w-full aspect-[4/3] relative rounded-lg overflow-hidden shadow-sm">
+                            <Image
+                                src="/research2.jpeg"
+                                alt="Research Image 2"
+                                fill
+                                className="object-cover"
+                            />
                         </div>
                     </div>
 
