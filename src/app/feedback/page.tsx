@@ -11,18 +11,22 @@ export default function FeedbackPage() {
                 </h1>
 
                 <div className="flex flex-col gap-6">
-                    <Link
-                        href="/feedback/form"
+                    <a
+                        href="https://forms.gle/1m7FfqjQV7pD8GSv7"
+                        target="_blank" 
+                        rel="noopener noreferrer"
                         className="w-80 py-4 bg-gray-300 text-black font-bold text-center rounded-md hover:bg-gray-400 transition-colors duration-200"
                     >
                         FEEDBACK
-                    </Link>
-                    <Link
-                        href="/feedback/qna"
+                    </a>
+                    <a
+                        href="https://forms.gle/JTEvaFFL5F1hbyMQ9"
+                        target="_blank" 
+                        rel="noopener noreferrer"
                         className="w-80 py-4 bg-gray-300 text-black font-bold text-center rounded-md hover:bg-gray-400 transition-colors duration-200"
                     >
                         QNA
-                    </Link>
+                    </a>
                 </div>
             </div>
 
@@ -52,6 +56,25 @@ export default function FeedbackPage() {
                             </svg>
                         </div>
                         <span className="font-bold text-black group-hover:underline">@pde_lab_telu</span>
+                    </a>
+
+                    {/* Linktree */}
+                    <a href="https://linktr.ee/labrispde" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
+                        <div className="w-8 h-8 text-black">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                strokeWidth="2" 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                            >
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                        </div>
+                        <span className="font-bold text-black group-hover:underline">Linktree PDE</span>
                     </a>
 
                     {/* Email */}

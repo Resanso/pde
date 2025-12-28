@@ -59,15 +59,94 @@ export default function AboutUsPage() {
                         Our Collaboration
                     </h2>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {[1, 2, 3, 4].map((item) => (
-                            <div
-                                key={item}
-                                className="h-32 w-full bg-gray-300 rounded-lg flex items-center justify-center text-gray-500 font-medium hover:bg-gray-400 transition-colors"
-                            >
-                                Partner Logo {item}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        {/* PDEV */}
+                        <a 
+                            href="https://pdev.labs.telkomuniversity.ac.id/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex flex-col items-center gap-4 group"
+                        >
+                            <div className="h-40 w-full bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center p-4 group-hover:shadow-md transition-all duration-300">
+                                <div className="relative w-32 h-32">
+                                    <Image 
+                                        src="/logo-collab/PDEV Laboratory.png" 
+                                        alt="PDEV Laboratory" 
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
                             </div>
-                        ))}
+                            <span className="font-bold text-gray-800 text-center group-hover:text-emerald-700 transition-colors">
+                                PDEV Laboratory
+                            </span>
+                        </a>
+
+                        {/* APKE */}
+                        <a 
+                            href="https://apk.labs.telkomuniversity.ac.id/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex flex-col items-center gap-4 group"
+                        >
+                            <div className="h-40 w-full bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center p-4 group-hover:shadow-md transition-all duration-300">
+                                <div className="relative w-32 h-32">
+                                    <Image 
+                                        src="/logo-collab/APKE Laboratory.png" 
+                                        alt="APKE Laboratory" 
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                            </div>
+                            <span className="font-bold text-gray-800 text-center group-hover:text-emerald-700 transition-colors">
+                                APKE Laboratory
+                            </span>
+                        </a>
+
+                        {/* PROSMAN */}
+                        <a 
+                            href="https://prosman.labs.telkomuniversity.ac.id/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex flex-col items-center gap-4 group"
+                        >
+                            <div className="h-40 w-full bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center p-4 group-hover:shadow-md transition-all duration-300">
+                                <div className="relative w-32 h-32">
+                                    <Image 
+                                        src="/logo-collab/PROSMAN Laboratory.png" 
+                                        alt="PROSMAN Laboratory" 
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                            </div>
+                            <span className="font-bold text-gray-800 text-center group-hover:text-emerald-700 transition-colors">
+                                PROSMAN Laboratory
+                            </span>
+                        </a>
+
+                        {/* SIMBI */}
+                        <a 
+                            href="https://simbi.labs.telkomuniversity.ac.id/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex flex-col items-center gap-4 group"
+                        >
+                            <div className="h-40 w-full bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center p-4 group-hover:shadow-md transition-all duration-300">
+                                <div className="relative w-32 h-32">
+                                    <Image 
+                                        src="/logo-collab/SIMBI Laboratory.png" 
+                                        alt="SIMBI Laboratory" 
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                            </div>
+                            <span className="font-bold text-gray-800 text-center group-hover:text-emerald-700 transition-colors">
+                                SIMBI Laboratory
+                            </span>
+                        </a>
                     </div>
                 </section>
 

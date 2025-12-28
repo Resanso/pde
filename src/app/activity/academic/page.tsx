@@ -16,14 +16,45 @@ export default function AcademicPage() {
 
                 {/* Buttons Container */}
                 <div className="w-full max-w-2xl flex flex-col gap-6">
-                    {buttons.map((text, index) => (
-                        <button
-                            key={index}
-                            className="w-full py-4 px-8 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-1"
-                        >
-                            {text}
-                        </button>
-                    ))}
+                    {/* Aplikasi Pendaftaran TA */}
+                    <a
+                        href="https://ta1.virtualfri.id/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 px-8 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-1 block text-center"
+                    >
+                        Aplikasi Pendaftaran TA
+                    </a>
+
+                    {/* Timeline Akademik */}
+                    <a
+                        href="https://baa.telkomuniversity.ac.id/kalender-akademik-2-2/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 px-8 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-1 block text-center"
+                    >
+                        Timeline Akademik (2025)
+                    </a>
+
+                    {/* Feedback */}
+                    <a
+                        href="https://forms.gle/1m7FfqjQV7pD8GSv7"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 px-8 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-1 block text-center"
+                    >
+                        Feedback
+                    </a>
+
+                    {/* QnA */}
+                    <a
+                        href="https://forms.gle/JTEvaFFL5F1hbyMQ9"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 px-8 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-1 block text-center"
+                    >
+                        QnA
+                    </a>
                 </div>
 
             </div>
