@@ -36,24 +36,14 @@ export default function AcademicPage() {
                         Timeline Akademik (2025)
                     </a>
 
-                    {/* Feedback */}
+                    {/* Topik TA */}
                     <a
-                        href="https://forms.gle/1m7FfqjQV7pD8GSv7"
+                        href="https://docs.google.com/spreadsheets/d/1vfXIlwQJ_HqsBpABnMyZ-WgUJew6t8fJoUmoVfs7nMo/edit?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full py-4 px-8 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-1 block text-center"
                     >
-                        Feedback
-                    </a>
-
-                    {/* QnA */}
-                    <a
-                        href="https://forms.gle/JTEvaFFL5F1hbyMQ9"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-4 px-8 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold text-lg rounded-full shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-1 block text-center"
-                    >
-                        QnA
+                        Topik TA
                     </a>
                 </div>
 

@@ -14,14 +14,17 @@ export function Footer() {
 Faculty of Industrial Engineering, Telkom University                        </p>
                     </div>
 
-                    {/* Logo Placeholder */}
-                    <div className="w-full flex justify-center">
-                        <div className="relative w-32 h-32 mb-4">
+                    {/* Logo and Designed By */}
+                    <div className="w-full flex flex-col items-center justify-center">
+                        <div className="relative w-32 h-32 mb-2">
                             <img src="/logo.png" alt="PDE Logo" className="w-full h-full object-contain" />
                         </div>
+                        <p className="text-white text-sm font-medium">
+                            Designed By : Gemini Capstone Team
+                        </p>
                     </div>
 
-                    <div className="w-full text-left text-white/60 text-xs border-t border-white/20 pt-4">
+                    <div className="w-full text-center text-white/60 text-xs border-t border-white/20 pt-4">
                         &copy; {new Date().getFullYear()} PDE Research Laboratory. All rights reserved.
                     </div>
                 </div>
