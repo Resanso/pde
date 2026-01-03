@@ -68,6 +68,74 @@ export async function createArticle(formData: FormData) {
     redirect('/dashboard?success=true')
 }
 
+export async function updateArticle(formData: FormData) {
+    const supabase = await createClient()
+
+    // Protected: User must be logged in
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) {
+        redirect('/login')
+    }
+
+    const id = formData.get('id') as string
+    if (!id) throw new Error('Article ID is required')
+
+    const title = formData.get('title') as string
+    const content = formData.get('content') as string
+    const date = formData.get('date') as string
+    const time = formData.get('time') as string
+
+    // Combine date and time
+    const scheduledAt = new Date(`${date}T${time}:00`).toISOString()
+
+    const imageFile = formData.get('image') as File
+    let imageUrl = null
+
+    if (imageFile && imageFile.size > 0) {
+        const fileExt = imageFile.name.split('.').pop()
+        const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`
+        const filePath = `${user.id}/${fileName}`
+
+        const { error: uploadError } = await supabase.storage
+            .from('article-images')
+            .upload(filePath, imageFile)
+
+        if (uploadError) {
+            console.error('Error uploading image:', uploadError)
+            throw new Error(`Upload failed: ${uploadError.message}`)
+        }
+
+        const { data: { publicUrl } } = supabase.storage
+            .from('article-images')
+            .getPublicUrl(filePath)
+            
+        imageUrl = publicUrl
+    }
+
+    const updateData: any = {
+        title,
+        content,
+        scheduled_at: scheduledAt,
+    }
+
+    if (imageUrl) {
+        updateData.image_url = imageUrl
+    }
+
+    const { error } = await supabase
+        .from('articles')
+        .update(updateData)
+        .eq('id', id)
+        .eq('user_id', user.id)
+
+    if (error) {
+        console.error('Error updating article:', error)
+        throw new Error('Failed to update article')
+    }
+
+    redirect('/dashboard?updated=true')
+}
+
 export async function deleteArticle(id: string) {
     const supabase = await createClient()
 

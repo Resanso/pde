@@ -1,6 +1,9 @@
 'use client'
 
 import { deleteArticle } from '@/app/dashboard/actions'
+import Link from 'next/link'
+import { useState } from 'react'
+import { ConfirmationModal } from '@/components/ui/ConfirmationModal'
 
 type Article = {
   id: string
@@ -12,6 +15,22 @@ type Article = {
 }
 
 export function ArticleList({ articles }: { articles: Article[] }) {
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [articleToDelete, setArticleToDelete] = useState<string | null>(null)
+
+  const handleDeleteClick = (id: string) => {
+    setArticleToDelete(id)
+    setDeleteModalOpen(true)
+  }
+
+  const handleConfirmDelete = async () => {
+    if (articleToDelete) {
+      await deleteArticle(articleToDelete)
+      setDeleteModalOpen(false)
+      setArticleToDelete(null)
+    }
+  }
+
   if (articles.length === 0) {
     return (
       <div className="text-center py-12 text-gray-500 bg-white rounded-xl border border-gray-200">
@@ -50,13 +69,15 @@ export function ArticleList({ articles }: { articles: Article[] }) {
                 <span>Created: {new Date(article.created_at).toLocaleDateString()}</span>
               </div>
             </div>
-            <div className="ml-4">
+            <div className="ml-4 flex items-center gap-2">
+              <Link
+                href={`/dashboard/edit/${article.id}`}
+                className="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors"
+              >
+                Edit
+              </Link>
               <button
-                onClick={async () => {
-                  if (confirm('Are you sure you want to delete this article?')) {
-                    await deleteArticle(article.id)
-                  }
-                }}
+                onClick={() => handleDeleteClick(article.id)}
                 className="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors"
                 type="button"
               >
@@ -66,6 +87,16 @@ export function ArticleList({ articles }: { articles: Article[] }) {
           </div>
         ))}
       </div>
+
+      <ConfirmationModal
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onConfirm={handleConfirmDelete}
+        title="Are you sure want to delete?"
+        confirmText="Delete"
+        cancelText="Cancel"
+        isDanger={true}
+      />
     </div>
   )
 }

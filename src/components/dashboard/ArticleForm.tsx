@@ -1,14 +1,31 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { createArticle } from '@/app/dashboard/actions'
+import { createArticle, updateArticle } from '@/app/dashboard/actions'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
-export function ArticleForm() {
+type Article = {
+    id: string
+    title: string
+    content: string
+    scheduled_at: string | null
+    image_url: string | null
+}
+
+export function ArticleForm({ article }: { article?: Article }) {
     const textareaRef = useRef<HTMLTextAreaElement>(null)
-    const [content, setContent] = useState('')
+    const [content, setContent] = useState(article?.content || '')
     const [isPreview, setIsPreview] = useState(false)
+
+    // Parse scheduled_at if exists
+    let defaultDate = ''
+    let defaultTime = ''
+    if (article?.scheduled_at) {
+        const dateObj = new Date(article.scheduled_at)
+        defaultDate = dateObj.toISOString().split('T')[0]
+        defaultTime = dateObj.toTimeString().slice(0, 5)
+    }
 
     const handleFormat = (type: 'bold' | 'italic' | 'list' | 'quote') => {
         const textarea = textareaRef.current
@@ -53,9 +70,12 @@ export function ArticleForm() {
 
     return (
         <div className="w-full max-w-3xl bg-[#F5F5F5] rounded-xl shadow-lg p-8 mx-auto">
-            <h2 className="text-2xl font-normal text-center mb-8 text-black">Add Information</h2>
+            <h2 className="text-2xl font-normal text-center mb-8 text-black">
+                {article ? 'Edit Information' : 'Add Information'}
+            </h2>
 
-            <form action={createArticle} className="space-y-6">
+            <form action={article ? updateArticle : createArticle} className="space-y-6">
+                {article && <input type="hidden" name="id" value={article.id} />}
                 {/* Subject Field */}
                 <div className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 items-center">
                     <label className="text-black text-lg">Subject</label>
@@ -64,6 +84,7 @@ export function ArticleForm() {
                         name="title"
                         required
                         className="w-full h-10 px-4 rounded-lg border border-gray-300 bg-[#F5F5F5] focus:outline-none focus:border-gray-500 transition-colors text-black"
+                        defaultValue={article?.title}
                     />
                 </div>
 
@@ -173,6 +194,7 @@ export function ArticleForm() {
                                 name="date"
                                 required
                                 className="w-full h-10 px-4 rounded-lg border border-gray-300 bg-[#F5F5F5] text-gray-500 focus:outline-none focus:border-gray-500"
+                                defaultValue={defaultDate}
                             />
                         </div>
                         <div className="relative">
@@ -181,6 +203,7 @@ export function ArticleForm() {
                                 name="time"
                                 required
                                 className="w-full h-10 px-4 rounded-lg border border-gray-300 bg-[#F5F5F5] text-gray-500 focus:outline-none focus:border-gray-500"
+                                defaultValue={defaultTime}
                             />
                         </div>
                     </div>
