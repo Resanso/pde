@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { SignOutButton } from '@/components/dashboard/SignOutButton'
 import { ArticleForm } from '@/components/dashboard/ArticleForm'
 import { ArticleList } from '@/components/dashboard/ArticleList'
+import { ActivityForm } from '@/components/dashboard/ActivityForm'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -32,6 +33,11 @@ export default async function DashboardPage() {
         <div className="py-8 space-y-12">
           <ArticleForm />
           <ArticleList articles={articles || []} />
+          
+          {/* Activity Management */}
+          <div className="border-t border-zinc-200 pt-12">
+            <ActivityForm />
+          </div>
         </div>
       </div>
     </div>

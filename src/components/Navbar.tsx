@@ -23,7 +23,6 @@ export function Navbar() {
                 { label: "Academic", href: "/activity/academic" },
                 { label: "Research", href: "/activity/research" },
                 { label: "Pengabdian Masyarakat", href: "/activity/community-service" },
-                { label: "Upload Activity", href: "/activity/upload" },
             ],
         },
         {
