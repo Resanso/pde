@@ -1,31 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, readFile, mkdir } from 'fs/promises'
-import path from 'path'
-import { existsSync } from 'fs'
-
-const DATA_FILE = path.join(process.cwd(), 'public', 'activity', 'data.json')
-const UPLOAD_DIR = path.join(process.cwd(), 'public', 'activity')
-
-interface Activity {
-    id: string
-    title: string
-    description: string
-    category: 'academic' | 'research' | 'community-service'
-    imageUrl: string
-    createdAt: string
-}
+import { createClient } from '@/lib/supabase/server'
 
 // GET - Fetch all activities
 export async function GET() {
     try {
-        if (!existsSync(DATA_FILE)) {
+        const supabase = await createClient()
+        
+        const { data: activities, error } = await supabase
+            .from('activities')
+            .select('*')
+            .order('created_at', { ascending: false })
+
+        if (error) {
+            console.error('Error fetching activities:', error)
             return NextResponse.json([])
         }
-        const data = await readFile(DATA_FILE, 'utf-8')
-        const activities: Activity[] = JSON.parse(data)
-        return NextResponse.json(activities)
+
+        // Transform to match frontend interface
+        const transformed = activities?.map(a => ({
+            id: a.id,
+            title: a.title,
+            description: a.description,
+            category: a.category,
+            imageUrl: a.image_url,
+            createdAt: a.created_at
+        })) || []
+
+        return NextResponse.json(transformed)
     } catch (error) {
-        console.error('Error reading activities:', error)
+        console.error('Error fetching activities:', error)
         return NextResponse.json([])
     }
 }
@@ -33,10 +36,12 @@ export async function GET() {
 // POST - Create new activity
 export async function POST(request: NextRequest) {
     try {
+        const supabase = await createClient()
+        
         const formData = await request.formData()
         const title = formData.get('title') as string
         const description = formData.get('description') as string
-        const category = formData.get('category') as 'academic' | 'research' | 'community-service'
+        const category = formData.get('category') as string
         const image = formData.get('image') as File
 
         if (!title || !description || !category || !image) {
@@ -46,44 +51,55 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        // Ensure upload directory exists
-        if (!existsSync(UPLOAD_DIR)) {
-            await mkdir(UPLOAD_DIR, { recursive: true })
+        // Upload image to Supabase Storage
+        const fileExt = image.name.split('.').pop()
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`
+
+        const { error: uploadError } = await supabase.storage
+            .from('article-images')
+            .upload(fileName, image)
+
+        if (uploadError) {
+            console.error('Error uploading image:', uploadError)
+            return NextResponse.json(
+                { error: `Upload failed: ${uploadError.message}` },
+                { status: 500 }
+            )
         }
 
-        // Generate unique filename
-        const ext = image.name.split('.').pop()
-        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`
-        const filePath = path.join(UPLOAD_DIR, fileName)
+        // Get public URL
+        const { data: { publicUrl } } = supabase.storage
+            .from('article-images')
+            .getPublicUrl(fileName)
 
-        // Save image file
-        const bytes = await image.arrayBuffer()
-        const buffer = Buffer.from(bytes)
-        await writeFile(filePath, buffer)
+        // Insert into database
+        const { data: newActivity, error: insertError } = await supabase
+            .from('activities')
+            .insert({
+                title,
+                description,
+                category,
+                image_url: publicUrl
+            })
+            .select()
+            .single()
 
-        // Read existing data
-        let activities: Activity[] = []
-        if (existsSync(DATA_FILE)) {
-            const data = await readFile(DATA_FILE, 'utf-8')
-            activities = JSON.parse(data)
+        if (insertError) {
+            console.error('Error creating activity:', insertError)
+            return NextResponse.json(
+                { error: 'Failed to create activity' },
+                { status: 500 }
+            )
         }
 
-        // Create new activity
-        const newActivity: Activity = {
-            id: Date.now().toString(),
-            title,
-            description,
-            category,
-            imageUrl: `/activity/${fileName}`,
-            createdAt: new Date().toISOString()
-        }
-
-        activities.unshift(newActivity)
-
-        // Save updated data
-        await writeFile(DATA_FILE, JSON.stringify(activities, null, 2))
-
-        return NextResponse.json(newActivity, { status: 201 })
+        return NextResponse.json({
+            id: newActivity.id,
+            title: newActivity.title,
+            description: newActivity.description,
+            category: newActivity.category,
+            imageUrl: newActivity.image_url,
+            createdAt: newActivity.created_at
+        }, { status: 201 })
     } catch (error) {
         console.error('Error creating activity:', error)
         return NextResponse.json(
@@ -96,6 +112,8 @@ export async function POST(request: NextRequest) {
 // DELETE - Delete activity
 export async function DELETE(request: NextRequest) {
     try {
+        const supabase = await createClient()
+        
         const { searchParams } = new URL(request.url)
         const id = searchParams.get('id')
 
@@ -106,39 +124,44 @@ export async function DELETE(request: NextRequest) {
             )
         }
 
-        // Read existing data
-        if (!existsSync(DATA_FILE)) {
+        // Get activity to find image URL
+        const { data: activity, error: fetchError } = await supabase
+            .from('activities')
+            .select('image_url')
+            .eq('id', id)
+            .single()
+
+        if (fetchError || !activity) {
             return NextResponse.json(
                 { error: 'Activity not found' },
                 { status: 404 }
             )
         }
 
-        const data = await readFile(DATA_FILE, 'utf-8')
-        let activities: Activity[] = JSON.parse(data)
+        // Extract filename from URL and delete from storage
+        const imageUrl = activity.image_url
+        if (imageUrl) {
+            const fileName = imageUrl.split('/').pop()
+            if (fileName) {
+                await supabase.storage
+                    .from('article-images')
+                    .remove([fileName])
+            }
+        }
 
-        // Find activity to delete
-        const activityIndex = activities.findIndex(a => a.id === id)
-        if (activityIndex === -1) {
+        // Delete from database
+        const { error: deleteError } = await supabase
+            .from('activities')
+            .delete()
+            .eq('id', id)
+
+        if (deleteError) {
+            console.error('Error deleting activity:', deleteError)
             return NextResponse.json(
-                { error: 'Activity not found' },
-                { status: 404 }
+                { error: 'Failed to delete activity' },
+                { status: 500 }
             )
         }
-
-        // Get image path and delete image file
-        const activity = activities[activityIndex]
-        const imagePath = path.join(process.cwd(), 'public', activity.imageUrl)
-        if (existsSync(imagePath)) {
-            const { unlink } = await import('fs/promises')
-            await unlink(imagePath)
-        }
-
-        // Remove from array
-        activities = activities.filter(a => a.id !== id)
-
-        // Save updated data
-        await writeFile(DATA_FILE, JSON.stringify(activities, null, 2))
 
         return NextResponse.json({ success: true })
     } catch (error) {
