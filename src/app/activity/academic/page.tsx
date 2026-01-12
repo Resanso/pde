@@ -1,10 +1,8 @@
-export default function AcademicPage() {
-    const buttons = [
-        "Aplikasi Pendaftaran TA",
-        "Timeline Akademik",
-        "XXXXXXXXXXX",
-    ];
+'use client'
 
+import { ActivityList } from '@/components/ActivityList'
+
+export default function AcademicPage() {
     return (
         <main className="min-h-screen bg-gray-50 pt-24 pb-16 px-4">
             <div className="max-w-5xl mx-auto flex flex-col items-center space-y-12">
@@ -46,6 +44,9 @@ export default function AcademicPage() {
                         Topik TA
                     </a>
                 </div>
+
+                {/* Activities */}
+                <ActivityList category="academic" />
 
             </div>
         </main>

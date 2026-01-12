@@ -1,3 +1,7 @@
+'use client'
+
+import { ActivityList } from '@/components/ActivityList'
+
 export default function CommunityServicePage() {
     return (
         <main className="min-h-screen bg-gray-50 pt-24 pb-16 px-4">
@@ -41,6 +45,9 @@ export default function CommunityServicePage() {
                         <div className="h-3 bg-gray-200 rounded w-[80%]"></div>
                     </div>
                 </div>
+
+                {/* Activities */}
+                <ActivityList category="community-service" />
 
             </div>
         </main>

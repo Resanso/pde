@@ -1,4 +1,7 @@
+'use client'
+
 import Image from "next/image";
+import { ActivityList } from '@/components/ActivityList'
 
 export default function ResearchPage() {
     return (
@@ -62,6 +65,9 @@ export default function ResearchPage() {
                     </div>
 
                 </div>
+
+                {/* Activities */}
+                <ActivityList category="research" />
 
             </div>
         </main>
